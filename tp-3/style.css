@@ -1,0 +1,40 @@
+/* Punto 1 */
+.titulo{
+    text-align: center;
+}
+
+/* Punto 2 */
+p.parrafo{
+    font-family: serif;
+}
+
+/* Punto 3 */
+p#primer-parrafo{
+    background-color: #CEE;
+}
+
+/* Punto 4 */
+p#primer-parrafo.importante em{
+    color: #933;
+}
+
+/* Punto 5 */
+#contenedor a,p.parrafo a{
+    outline: 1px solid #333
+}
+
+/* Punto 6 */
+body p.fuente.parrafo:last-of-type{
+    opacity: 100%;
+}
+
+/* Punto 7 */
+html body p.fuente.parrafo.fuente a{
+    color: #000;
+}
+
+/* Punto 8 */
+.complicado {
+    font-weight: bold;
+    color: #C62 !important;
+}
