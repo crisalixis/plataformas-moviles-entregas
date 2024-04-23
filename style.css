@@ -2,3 +2,20 @@
     margin: 0;
     box-sizing: border-box;
 }
+
+body {
+    background-color: #F5DCC9;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+a[href]{
+    color:#D04524 ;
+}
+
+h1{
+    color: #9B480C;
+}
+
+h2{
+    color: #BA601F;
+}
