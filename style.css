@@ -4,7 +4,7 @@
 }
 
 body {
-    background-color: #F5DCC9;
+    background-color: $orange-200;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
