@@ -141,7 +141,10 @@ console.log("encontrarNumeroMayor(listaNumerosEjemplo): ", encontrarNumeroMayor(
  * - ordenarPalabrasPorLongitud(['abc', 'a', 'ab']) retorna ['a', 'ab', 'abc']
  */
 function ordenarPalabrasPorLongitud(listaDePalabras) {
-    listaDePalabras.sort((a,b) => { return a.length -b.length})
+    let res = listaDePalabras.sort(function(a,b){
+        return a.length -b.length
+    });
+    return res;
 }
 console.log("ordenarPalabrasPorLongitud(['abc', 'a', 'ab']): ", ordenarPalabrasPorLongitud(['abc', 'a', 'ab']))
 
