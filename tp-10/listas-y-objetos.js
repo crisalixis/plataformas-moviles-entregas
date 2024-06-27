@@ -54,10 +54,10 @@ console.log("ordenarPorApellido()", ordenarPorApellido(listaPersonasEjemplo));
  */
 function soloNombres(listaDePersonas) {
     let listaNombres = [];
-    let pos = listaDePersonas.lenght
-    for(i = 0; i <= pos; i++){
-        let nombre = listaNombres[i];
-        listaNombres[i] = nombre; 
+    let pos = listaDePersonas.length
+    
+    for(let i = 0; i < pos; i++){
+        listaNombres.push(listaDePersonas[i].nombre);
     };
 
     return listaNombres
@@ -74,7 +74,17 @@ console.log("soloNombres()", soloNombres(listaPersonasEjemplo));
  * - un numero, con el cálculo del promedio de las edades
  */
 function promedioEdades(listaDePersonas) {
-    //
+    let suma = 0;
+    let listaEdad = [];
+    let pos = listaDePersonas.length
+
+    for(let i = 0; i < pos; i++){
+        listaEdad.push(listaDePersonas[i].edad);
+        suma += listaEdad[i];
+    };
+
+    let prom = suma/pos
+    return prom
 }
 console.log("promedioEdades()", promedioEdades(listaPersonasEjemplo));
 
@@ -88,7 +98,18 @@ console.log("promedioEdades()", promedioEdades(listaPersonasEjemplo));
  * - una lista, array, conteniendo solamente las personas con más de 18 años
  */
 function soloMayoresDeEdad(listaDePersonas) {
-    //
+    let listaEdad = [];
+    let pos = listaDePersonas.length
+
+    for(let i = 0; i < pos; i++){
+        listaEdad.push(listaDePersonas[i].edad);
+    };
+
+    let listaEdadFiltrada = listaEdad.filter(function(res){
+        return res > 18;
+    })
+
+    return listaEdadFiltrada
 }
 console.log("soloMayoresDeEdad()", soloMayoresDeEdad(listaPersonasEjemplo));
 
@@ -102,6 +123,20 @@ console.log("soloMayoresDeEdad()", soloMayoresDeEdad(listaPersonasEjemplo));
  * - una objeto con la persona de mayor edad en todo el listado. En caso de que hayan 2 personas con la misma edad, se puede retornar la primera que aparezca en el listado.
  */
 function laPersonaMayor(listaDePersonas) {
-    //
+    let listaEdad = [];
+    let pos = listaDePersonas.length
+
+    for(let i = 0; i < pos; i++){
+        listaEdad.push(listaDePersonas[i].edad);
+    };
+    
+    let max = listaEdad[0];
+
+    for (let i = 0; i < pos; i++) {
+        if (listaEdad[i] > max) {
+            max = listaEdad[i];
+        }
+    }
+    return max;
 }
 console.log("laPersonaMayor()", laPersonaMayor(listaPersonasEjemplo));
