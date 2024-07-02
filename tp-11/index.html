@@ -19,6 +19,7 @@
 
                 <h2>Opciones de Formato</h2>
                 <div class="row">
+                    <input type="text" placeholder="Nuevo texto" id="text" data-formato="text">
                     <div class="col-12 col-md-4 my-1">
                         <button id="btn-negrita" class="btn d-block w-100 btn-primary" data-formato="negrita">
                             Bold (Negrita)
@@ -34,10 +35,16 @@
                             Underline (Subrayado)
                         </button>
                     </div>
+                    <div class="col-12 col-md-4 my-1">
+                        <button id="btn-color" class="btn d-block w-100 btn-primary" data-formato="color">
+                            Color (Cambio de color)
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+    <input id="input">
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
     <script type="text/javascript">
@@ -46,7 +53,14 @@
          * esta función se va a llamar cuando el usuario selecciona la opción Bold (negrita).
          */
         function funcionNegrita() {
-            // su implementación
+            let parrafo = document.querySelector('p#texto.texto');
+            if (parrafo.style.fontWeight === "bold") {
+                parrafo.style.fontWeight = null;
+            } else {
+                parrafo.style.fontWeight = "bold";
+            }
+
+
         }
 
         /**
@@ -54,7 +68,14 @@
          * esta función se va a llamar cuando el usuario selecciona la opción Bold (negrita).
          */
         function funcionCursiva() {
-            // su implementación
+            let parrafo = document.querySelector('p#texto.texto');
+            if (parrafo.style.fontStyle === "italic") {
+                parrafo.style.fontStyle = null;
+            } else {
+                parrafo.style.fontStyle = "italic";
+            }
+
+            
         }
 
         /**
@@ -62,9 +83,28 @@
          * esta función se va a llamar cuando el usuario selecciona la opción Bold (negrita).
          */
         function funcionSubrayado() {
-            // su implementación
-        }
+            let parrafo = document.querySelector('p#texto.texto');
+            if (parrafo.style.textDecoration === "underline") {
+                parrafo.style.textDecoration = null;
+            } else {
+                parrafo.style.textDecoration = "underline";
+            }
 
+        }
+        function funcionColor(){
+            let parrafo = document.querySelector('p#texto.texto');
+            if (parrafo.style.color === 'red') {
+                parrafo.style.color = null;
+            } else {
+                parrafo.style.color = 'red';
+            }
+
+        }
+        function funcionTexto(){
+            let texto = document.querySelector('text').value;
+            
+            
+        }
         function handlerBoton(e) {
             const funcionBoton = e.target.dataset.formato;
             switch (funcionBoton) {
@@ -76,6 +116,12 @@
                     break;
                 case 'subrayado':
                     funcionSubrayado();
+                    break;
+                case 'color':
+                    funcionColor();
+                    break;
+                case 'text':
+                    funcionTexto();
                     break;
             }
         }
