@@ -14,8 +14,11 @@
                 <h2>Listado de Productos</h2>
                 
                 <ul id="lista-productos">
-                    <li>Pan</li>
+                    <li>Pan<button  class="btn btn-danger btn-sm float-end eliminar-producto" onclick="eliminarProducto(this)">Eliminar</button></li>
                 </ul>
+
+                <button id="limpiar-lista" class="btn btn-warning mt-2" onclick="eliminarLista()">Limpiar Lista</button>
+                <button id="ordenar-lista" class="btn btn-secondary mt-2" onclick="ordenarLista()">Ordenar Alfabéticamente</button>
 
                 <hr class="hr">
 
@@ -32,14 +35,32 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
     <script type="text/javascript">
-        /**
-         * agregarProducto()
-         * esta función se va a llamar cuando el usuario envía el formulario con el nombre del producto para agregar.
-         */
+
         function agregarProducto(nombreProducto) {
-            // su implementación
+            const ul = document.querySelector('#lista-productos');
+            const li = document.createElement('li')
+            li.innerHTML = `${nombreProducto} <button class="btn btn-danger btn-sm float-end eliminar-producto" onclick="eliminarProducto(this)">Eliminar</button>`;
+            ul.appendChild(li);
+
         }
 
+        function eliminarProducto(button){
+            const li = button.parentElement;
+            li.remove();
+        }
+
+        function eliminarLista(){
+            const li = document.querySelector('#lista-productos');
+            li.innerHTML= ' ';
+        }
+
+        function ordenarLista(){
+            const ul = document.querySelector('#lista-productos');
+            const li = Array.from(ul.getElementsByTagName('li'));
+            li.sort((a, b) => a.textContent.toLowerCase().localeCompare(b.textContent.toLowerCase()));
+            ul.innerHTML = '';
+            li.forEach(item => ul.appendChild(item));
+        }
         function handlerFormulario(e) {
             e.preventDefault();
             const input = e.target.querySelector('input');
