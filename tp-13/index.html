@@ -15,6 +15,10 @@
 
                 <ul id="lista-contactos"></ul>
 
+                <button class="btn btn-info" type="submit">Nombre</button>
+                <button class="btn btn-info" type="submit">Apellido</button>
+                <button class="btn btn-warning" type="submit">Favorito</button>
+                
                 <hr class="hr">
 
                 <h2>Nuevo Contacto</h2>
@@ -22,6 +26,8 @@
                     <div class="input-group mb-3">
                         <input type="text" class="form-control" name="nombre" id="input-nombre" placeholder="Nombre" aria-label="Nombre">
                         <input type="text" class="form-control" name="apellido" id="input-apellido" placeholder="Apellido" aria-label="Apellido">
+                        <input type="text" class="form-control" name="numero" id="input-numero" placeholder="Numero Telefonico" aria-label="Numero Telefonico">
+
                     </div>
                     <button class="btn btn-primary" type="submit">Agregar Contacto</button>
                 </form>
@@ -35,6 +41,7 @@
             {
                 nombre: 'Juan',
                 apellido: 'Perez',
+                numero: 123456789,
             },
         ];
 
@@ -42,33 +49,45 @@
          * agregarContacto()
          * esta función se va a llamar cuando el usuario envía el formulario con el nuevo contacto para agregar.
          */
-        function agregarContacto(nombre, apellido) {
-            // su implementación
+        function agregarContacto(nombre, apellido, numero) {
+            contactos.push({ nombre, apellido, numero });
+
+            mostrarListado();
+                                          
         }
 
-        /**
-         * mostrarListado()
-         * esta función se encarga de mostrar en el DOM la lista de todos los contactos guardados en la variable global contactos.
-         */
         function mostrarListado() {
-            // su implementación
+            const listaContactos = document.querySelector('#lista-contactos');
+            listaContactos.innerHTML = "";
+
+            contactos.forEach(contacto => {
+                const li = document.createElement('li')
+                li.textContent = `${contacto.nombre} ${contacto.apellido} ${contacto.numero}`;
+                listaContactos.appendChild(li);
+
+            })
         }
 
         function handlerFormulario(e) {
             e.preventDefault();
             const inputNombre = e.target.querySelector('#input-nombre');
             const inputApellido = e.target.querySelector('#input-apellido');
+            const inputTelefono = e.target.querySelector('#input-numero');
 
             const nombre = inputNombre.value;
             const apellido = inputApellido.value;
+            const numero = inputTelefono.value;
 
             inputNombre.value = "";
             inputApellido.value = "";
+            inputTelefono.value = "";
 
-            agregarContacto(nombre, apellido);
+            agregarContacto(nombre, apellido, numero);
         }
 
         document.querySelector('form').addEventListener('submit', handlerFormulario);
+
+        mostrarListado();
     </script>
 </body>
 </html>
