@@ -15,9 +15,9 @@
 
                 <ul id="lista-contactos"></ul>
 
-                <button class="btn btn-info" type="submit">Nombre</button>
-                <button class="btn btn-info" type="submit">Apellido</button>
-                <button class="btn btn-warning" type="submit">Favorito</button>
+                <button class="btn btn-info" type="submit" onclick="ordenarContactosNombre()">Nombre</button>
+                <button class="btn btn-info" type="submit" onclick="ordenarContactosApellido()">Apellido</button>
+                <button class="btn btn-warning" type="submit" onclick="filtrarFavoritos()">Mostrar Favoritos</button>
                 
                 <hr class="hr">
 
@@ -27,7 +27,6 @@
                         <input type="text" class="form-control" name="nombre" id="input-nombre" placeholder="Nombre" aria-label="Nombre">
                         <input type="text" class="form-control" name="apellido" id="input-apellido" placeholder="Apellido" aria-label="Apellido">
                         <input type="text" class="form-control" name="numero" id="input-numero" placeholder="Numero Telefonico" aria-label="Numero Telefonico">
-
                     </div>
                     <button class="btn btn-primary" type="submit">Agregar Contacto</button>
                 </form>
@@ -42,30 +41,55 @@
                 nombre: 'Juan',
                 apellido: 'Perez',
                 numero: 123456789,
+                favorito: false, // Añadir propiedad favorito
             },
         ];
 
-        /**
-         * agregarContacto()
-         * esta función se va a llamar cuando el usuario envía el formulario con el nuevo contacto para agregar.
-         */
-        function agregarContacto(nombre, apellido, numero) {
-            contactos.push({ nombre, apellido, numero });
+        let mostrarSoloFavoritos = false; // Bandera para mostrar solo favoritos
 
+        function agregarContacto(nombre, apellido, numero) {
+            contactos.push({ nombre, apellido, numero, favorito: false });
             mostrarListado();
-                                          
         }
 
         function mostrarListado() {
             const listaContactos = document.querySelector('#lista-contactos');
             listaContactos.innerHTML = "";
 
-            contactos.forEach(contacto => {
-                const li = document.createElement('li')
-                li.textContent = `${contacto.nombre} ${contacto.apellido} ${contacto.numero}`;
-                listaContactos.appendChild(li);
+            // Filtrar si se deben mostrar solo los favoritos
+            const contactosFiltrados = mostrarSoloFavoritos
+                ? contactos.filter(contacto => contacto.favorito)
+                : contactos;
 
-            })
+            contactosFiltrados.forEach((contacto, index) => {
+                const li = document.createElement('li');
+                li.innerHTML = `${contacto.nombre} ${contacto.apellido} ${contacto.numero} 
+                <button data-index="${index}" onclick="marcarFavorito(this)" class="btn btn-sm btn-outline-${contacto.favorito ? 'success' : 'secondary'}">
+                    ${contacto.favorito ? 'Favorito' : 'Marcar Favorito'}
+                </button>`;
+                listaContactos.appendChild(li);
+            });
+        }
+
+        function marcarFavorito(button) {
+            const index = button.getAttribute('data-index');
+            contactos[index].favorito = !contactos[index].favorito;
+            mostrarListado();
+        }
+
+        function filtrarFavoritos() {
+            mostrarSoloFavoritos = !mostrarSoloFavoritos;  // Cambia la bandera
+            mostrarListado();
+        }
+
+        function ordenarContactosNombre() {
+            contactos.sort((a, b) => a.nombre.localeCompare(b.nombre));
+            mostrarListado();
+        }
+
+        function ordenarContactosApellido() {
+            contactos.sort((a, b) => a.apellido.localeCompare(b.apellido));
+            mostrarListado();
         }
 
         function handlerFormulario(e) {
